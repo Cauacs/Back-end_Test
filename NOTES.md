@@ -11,3 +11,4 @@
 
 route -> service -> repository -> Prisma
 - I used the last returned calculation `id` as the history cursor, ordered newest-first, and fetch `limit + 1` rows to know when to expose `nextCursor`.
+- I kept clear-history as an explicit repository operation and return the deleted count so the API response confirms the side effect.

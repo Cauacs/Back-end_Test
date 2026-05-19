@@ -47,6 +47,12 @@ export class SquareRootRepository {
 		};
 	}
 
+	async clearHistory(): Promise<number> {
+		const result = await prisma.calculation.deleteMany();
+
+		return result.count;
+	}
+
 	private toResponse(calculation: PersistedCalculation): SqrtCalculationResponse {
 		return {
 			id: calculation.id,

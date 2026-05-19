@@ -24,6 +24,12 @@ export class SquareRootService {
 		return ServiceResponse.success("Calculation history retrieved successfully", history, StatusCodes.OK);
 	}
 
+	async clearHistory(): Promise<ServiceResponse<{ deletedCount: number }>> {
+		const deletedCount = await this.repository.clearHistory();
+
+		return ServiceResponse.success("Calculation history cleared successfully", { deletedCount }, StatusCodes.OK);
+	}
+
 	private calculateAsync(input: number): Promise<number> {
 		return new Promise((resolve, reject) => {
 			setImmediate(() => {

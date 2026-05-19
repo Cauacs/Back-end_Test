@@ -23,6 +23,15 @@ squareRootRouter.get(
 	},
 );
 
+squareRootRouter.delete("/history", async (_req: Request, res: Response, next: NextFunction) => {
+	try {
+		const serviceResponse = await squareRootService.clearHistory();
+		return handleServiceResponse(serviceResponse, res);
+	} catch (error) {
+		next(error);
+	}
+});
+
 squareRootRouter.post(
 	"/calculate",
 	validateRequest(calculateSquareRootSchema),
