@@ -8,7 +8,13 @@
 - I added Prisma behind a feature repository so the service persists successful calculations without coupling the route or the calculation model to database details.
 - I used Prisma 7's generated-client output and SQLite driver adapter, and added prebuild/pretest generation so ignored generated files are recreated on a fresh checkout.
 - I added a `prestart:dev` Prisma setup step so a reviewer can run the normal dev script and get generated client code plus an initialized SQLite table before the API starts.
-
 route -> service -> repository -> Prisma
 - I used the last returned calculation `id` as the history cursor, ordered newest-first, and fetch `limit + 1` rows to know when to expose `nextCursor`.
 - I kept clear-history as an explicit repository operation and return the deleted count so the API response confirms the side effect.
+- User types number
+ -> validateInput()
+ -> POST /square-root/calculate
+ -> setLatestResult()
+ -> reload history
+ -> render table
+ -> Load more uses nextCursor
