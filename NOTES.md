@@ -19,3 +19,4 @@ route -> service -> repository -> Prisma
  -> render table
  -> Load more uses nextCursor
 - I added Supertest integration coverage around the real Express app and Prisma-backed database behavior instead of mocking the square-root routes.
+- I added a small capped in-memory result cache for repeated inputs, but still persist every successful calculation so the history remains complete.
