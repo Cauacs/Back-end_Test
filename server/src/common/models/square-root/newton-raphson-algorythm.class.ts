@@ -6,4 +6,14 @@ import { SqrtAlgorithm } from "./sqrt-algorythm.a-class";
 // 3. Repeat step 2 until the guess is within the tolerance
 // 4. Return the guess
 
-export class NewtonRaphsonAlgorithm extends SqrtAlgorithm {}
+export class NewtonRaphsonAlgorithm extends SqrtAlgorithm {
+	protected approximateGuess(): number {
+		const currentGuess = this.result === 0 ? this.getInitialGuess() : this.result;
+
+		return 0.5 * (currentGuess + this.number / currentGuess);
+	}
+
+	private getInitialGuess(): number {
+		return this.number >= 1 ? this.number / 2 : 1;
+	}
+}
