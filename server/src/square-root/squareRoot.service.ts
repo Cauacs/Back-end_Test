@@ -1,4 +1,3 @@
-import { randomUUID } from "node:crypto";
 import { StatusCodes } from "http-status-codes";
 
 import type { SqrtCalculationRequest, SqrtCalculationResponse } from "@shared/types";
@@ -6,15 +5,14 @@ import type { SqrtCalculationRequest, SqrtCalculationResponse } from "@shared/ty
 import { ServiceResponse } from "@/common/models/serviceResponse";
 import { NewtonRaphsonAlgorithm, SqrtCalculator } from "@/common/models/square-root";
 
+import { squareRootRepository, type SquareRootRepository } from "./squareRoot.repository";
+
 export class SquareRootService {
+	constructor(private readonly repository: SquareRootRepository = squareRootRepository) {}
+
 	async calculate(request: SqrtCalculationRequest): Promise<ServiceResponse<SqrtCalculationResponse>> {
 		const result = await this.calculateAsync(request.input);
-		const calculation: SqrtCalculationResponse = {
-			id: randomUUID(),
-			input: request.input,
-			result,
-			createdAt: new Date().toISOString(),
-		};
+		const calculation = await this.repository.createCalculation(request.input, result);
 
 		return ServiceResponse.success("Square root calculated successfully", calculation, StatusCodes.CREATED);
 	}
