@@ -20,7 +20,7 @@
 		"lint": "biome lint",
 		"lint:fix": "biome lint --fix",
 		"format": "biome format --write",
-		"pretest": "prisma generate",
+		"pretest": "pnpm db:setup",
 		"test": "vitest run",
 		"test:cov": "vitest run --coverage",
 		"check": "pnpm lint && pnpm format && pnpm build && pnpm test"

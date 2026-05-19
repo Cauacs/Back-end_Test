@@ -18,3 +18,4 @@ route -> service -> repository -> Prisma
  -> reload history
  -> render table
  -> Load more uses nextCursor
+- I added Supertest integration coverage around the real Express app and Prisma-backed database behavior instead of mocking the square-root routes.
